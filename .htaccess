@@ -1,0 +1,35 @@
+RewriteEngine On
+
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# PHP under CGI or FastCGI receives the Authorization header only when it is
+# copied into the environment.
+SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+
+# Server code, stored uploads, tests and documents are never served directly;
+# attachments are reached only through api/media.php.
+RewriteRule ^(includes|uploads|tests|docs)(/|$) - [F,L]
+
+# Every other path that is not a file serves the application, which keeps its
+# address at /. Unknown API paths are left to answer 404.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(?!api/)(.*)$ /index.html [L]
+
+<FilesMatch "^(\.|schema\.sql$|package\.json$|.*\.md$)">
+  Require all denied
+</FilesMatch>
+
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set X-Content-Type-Options "nosniff"
+Header always set Referrer-Policy "no-referrer"
+Header always set X-Robots-Tag "noindex, nofollow"
+Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' blob: data: https:; media-src 'self' blob:; connect-src 'self' https://api.jolpi.ca https://api.openf1.org; frame-src 'self' blob:; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
+
+# Application files are revalidated on every load, so a deployment never runs
+# beside modules cached from the previous one.
+<FilesMatch "\.(js|css|html|json)$">
+  Header set Cache-Control "no-cache"
+</FilesMatch>

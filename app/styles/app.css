@@ -1,0 +1,39 @@
+[hidden] {
+  display: none !important;
+}
+
+.context-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 6px 16px;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.context-banner__action {
+  background: none;
+  border: 1px solid var(--border-glass);
+  border-radius: 999px;
+  color: var(--accent-tron);
+  font: inherit;
+  padding: 3px 10px;
+  cursor: pointer;
+}
+
+.https-required {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #0a0a0f;
+  color: #ef4444;
+  font-family: monospace;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+}

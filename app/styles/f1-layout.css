@@ -1,0 +1,201 @@
+.f1-root {
+  --f1-border: rgba(232, 0, 45, 0.4);
+  --f1-glow: rgba(232, 0, 45, 0.25);
+  --bg-carbon: radial-gradient(circle at center, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  --glass-bg: rgba(10, 10, 15, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+  --text-active: #ffffff;
+  --text-muted: #8b8d98;
+  --accent-gold: #FFD700;
+  --accent-silver: #C0C0C0;
+  --accent-bronze: #CD7F32;
+  --f1-red: #E8002D;
+  --f1-gold: #FFD700;
+
+  height: 100dvh;
+  background-color: #020202;
+  background-image: var(--bg-carbon);
+  background-size: 20px 20px;
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
+.f1-root::-webkit-scrollbar {
+  width: 6px;
+}
+.f1-root::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+.f1-root::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.f1-root::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background:
+    radial-gradient(circle at 15% 50%, rgba(232, 0, 45, 0.04), transparent 50%),
+    radial-gradient(circle at 85% 30%, rgba(0, 210, 255, 0.03), transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.f1-ui-layer {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.f1-header {
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(40px);
+  background: var(--glass-bg);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  padding: 0 40px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  z-index: 100;
+}
+
+.f1-logo-container {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.f1-logo {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #fff;
+  text-transform: uppercase;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.f1-logo-accent {
+  color: var(--f1-red);
+}
+
+.f1-nav-tabs {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.f1-nav-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.f1-tab {
+  padding: 10px 24px;
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid transparent;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.f1-tab:hover {
+  color: var(--text-active);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.f1-tab.active {
+  color: #fff;
+  background: rgba(232, 0, 45, 0.1);
+  border-color: rgba(232, 0, 45, 0.3);
+  box-shadow: inset 0 0 10px rgba(232, 0, 45, 0.1), 0 0 15px rgba(232, 0, 45, 0.15);
+}
+
+.f1-season-selector {
+  display: flex;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 4px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--glass-border);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.f1-season-btn {
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.f1-season-btn:hover {
+  color: var(--text-active);
+}
+
+.f1-season-btn.active {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.f1-content-box {
+  padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .f1-header {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 16px;
+    gap: 16px;
+    justify-content: space-between;
+  }
+
+  .f1-nav-tabs {
+    flex-basis: 100%;
+    padding-bottom: 4px;
+    border-top: 1px solid var(--glass-border);
+    padding-top: 12px;
+  }
+
+  .f1-season-selector {
+    width: 100%;
+    margin-top: 12px;
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+
+  .f1-content-box {
+    padding: 16px;
+  }
+}
